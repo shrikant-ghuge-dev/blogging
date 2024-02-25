@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Button, Card, CardBody, CardHeader, Col, Container, Form, FormFeedback, FormGroup, Input, Label, Row } from 'reactstrap';
 import { doLogin } from '../Auth';
@@ -7,6 +8,7 @@ import { signin } from '../Services/UserService';
 
 
 function Login() {
+    const navigate = useNavigate();
     const [data, setData] = useState({
         username: '',
         password: ''
@@ -34,10 +36,10 @@ function Login() {
         signin(data).then(res => {
             doLogin(res, () => {
                 console.log("data saved in local storage");
-
+                navigate("/user/dashboard");
+                toast.success("User login successfully!!");
+                resetForm();
             });
-            toast.success("User login successfully!!");
-            resetForm();
         }).catch(err => {
             if (err.response.status === 400 || err.response.status === 404) {
                 toast.error(res.response.data.message);

@@ -5,6 +5,7 @@ import CustomNavbar from '../Components/CustomNavbar';
 function Home() {
     return (
         <div>
+            Home
             <Outlet />
         </div>
     )

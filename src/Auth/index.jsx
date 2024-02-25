@@ -18,8 +18,8 @@ export const logout = (next) => {
 
 export const getCurrentUserDetails = () => {
     if (isLoggedIn) {
-        return JSON.parse(localStorage.getItem("data")).user;
+        return JSON.parse(localStorage.getItem("data"))?.user;
     } else {
-        return false
+        return undefined
     }
 }

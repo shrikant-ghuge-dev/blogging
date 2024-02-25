@@ -12,24 +12,44 @@ import SignUp from './Pages/SignUp.jsx';
 import Home from './Pages/Home.jsx';
 import Layout from './Components/Layout.jsx';
 import { ToastContainer } from 'react-toastify';
+import User from './Pages/User.jsx';
+import UserProfile from './Pages/UserRoutes/UserProfile.jsx';
+import UserDashboard from './Pages/UserRoutes/UserDashboard.jsx';
 
 const router = createBrowserRouter([
   {
     element: <Layout />,
-    children: [{
-      path: "/",
-      element: <Home />,
-    },
-    {
-      path: "login",
-      element: <Login />,
-      // errorElement: <ErrorPage />,
-    },
-    {
-      path: "signup",
-      element: <SignUp />,
-    }]
-  }]);
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "signup",
+        element: <SignUp />,
+      },
+      {
+        path: 'user',
+        element: <User />,
+        children: [
+          {
+            path: 'profile',
+            element: <UserProfile />
+          },
+          {
+            path: 'dashboard',
+            element: <UserDashboard />
+          }
+        ]
+      }
+    ]
+  },
+
+]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
