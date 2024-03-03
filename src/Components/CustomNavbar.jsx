@@ -56,7 +56,7 @@ function CustomNavbar() {
                     <Nav navbar>
                         {isLogin ? <>
                             <NavItem>
-                                <NavLink tag={Link} to="/signup">Profile</NavLink>
+                                <NavLink tag={Link} to="/user/profile">Profile</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink onClick={doLogout}>Logout</NavLink>
