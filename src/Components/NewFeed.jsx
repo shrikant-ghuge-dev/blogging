@@ -38,14 +38,12 @@ function NewFeed() {
                 lastPage: data.lastPage,
                 pageNumber: data.pageNumber
             })
-            // window.scroll(0, 0)
         }).catch(error => {
             toast.error(error);
         })
     }
 
     const changePageInfinite = () => {
-        console.log("page chanaged")
         setCurrentPage(currentPage + 1)
     }
     return (

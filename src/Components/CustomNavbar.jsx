@@ -13,7 +13,6 @@ function CustomNavbar() {
     useEffect(() => {
         setIsLogin(isLoggedIn());
         setUser(getCurrentUserDetails());
-        console.log("called")
     }, [isLogin])
 
     const doLogout = () => {

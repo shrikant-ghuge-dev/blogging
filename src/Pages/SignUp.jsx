@@ -19,10 +19,6 @@ function SignUp() {
         isError: false,
     });
 
-    // useEffect(() => {
-    //     console.log(data)
-    // }, [data])
-
     const handleChange = (e, property) => {
         setData({ ...data, [property]: e.target.value });
     }
@@ -39,16 +35,13 @@ function SignUp() {
     const submitForm = (event) => {
         event.preventDefault();
         signup(data).then((res) => {
-            console.log(res)
             toast.success("User registered successfully!!");
             resetData();
         }).catch((err) => {
-            console.log("-----")
             setError({
                 error: err,
                 isError: true
             })
-            console.log(error)
         })
     }
     return (

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { Button, Card, CardBody, CardText } from 'reactstrap'
 
 function Post({ post }) {
-    console.log(post)
     return (
         <Card className='border-0 shadow mt-3'>
             <CardBody>

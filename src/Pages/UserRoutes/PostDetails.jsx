@@ -20,8 +20,6 @@ function PostDetails() {
     }, [])
 
     const getDate = (date) => {
-        console.log(date)
-        console.log(new Date(date).toString())
         return new Date(date).toLocaleDateString()
     }
 

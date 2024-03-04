@@ -35,7 +35,6 @@ function Login() {
 
         signin(data).then(res => {
             doLogin(res, () => {
-                console.log("data saved in local storage");
                 navigate("/user/dashboard");
                 toast.success("User login successfully!!");
                 resetForm();
