@@ -1,12 +1,14 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom';
-import CustomNavbar from '../Components/CustomNavbar';
+import { useEffect } from 'react';
+import { Container } from 'reactstrap';
+import NewFeed from '../Components/NewFeed';
 
 function Home() {
+
     return (
-        <div>
-            Home
-        </div>
+        <Container>
+            <NewFeed />
+        </Container>
     )
 }
 
