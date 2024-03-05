@@ -1,6 +1,6 @@
 import { myAxios, privateAxios } from "./Helper"
 
-export const addPost = (postData) => {
+export const addBlogPost = (postData) => {
     return privateAxios.post(`/user/${postData.userId}/category/${postData.categoryId}/posts`, postData).then(res => res.data)
 }
 
@@ -14,4 +14,22 @@ export const loadPostDetails = (postId) => {
 
 export const addComment = (comment, postId) => {
     return privateAxios.post(`/post/${postId}/comments`, comment).then(res => res.data)
+}
+
+export const imageUpload = (image, postId) => {
+    let formData = new FormData();
+    formData.append("image", image)
+    return privateAxios.post(`/post/image/upload/${postId}`, formData).then(res => res.data)
+}
+
+export const getPostsByCategory = (catId) => {
+    return myAxios.get(`/category/${catId}/posts`).then(res => res.data)
+}
+
+export const getPostsByUser = (userId) => {
+    return myAxios.get(`/user/${userId}/posts`).then(res => res.data)
+}
+
+export const deletePost = (postId) => {
+    return privateAxios.delete(`/posts/${postId}`).then(res => res.data)
 }

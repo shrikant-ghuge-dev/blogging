@@ -6,13 +6,14 @@ import { Button, Card, CardBody, Container, Form, Input, Label } from 'reactstra
 import { getCategories } from '../Services/Category'
 import JoditEditor from 'jodit-react';
 import { toast } from 'react-toastify'
-import { addPost as savePost } from '../Services/PostService'
+import { addBlogPost, imageUpload } from '../Services/PostService'
 import { getCurrentUserDetails } from '../Auth'
 
 function AddPost() {
     const editor = useRef(null);
     const [user, setUser] = useState(undefined);
     const [categories, setCategories] = useState([]);
+    const [image, setImage] = useState(null)
     const [postData, setPostData] = useState({
         title: '',
         content: '',
@@ -52,7 +53,10 @@ function AddPost() {
         }
 
         postData['userId'] = user.id;
-        savePost(postData).then(res => {
+        addBlogPost(postData).then(res => {
+            imageUpload(image, res?.postId).then(response => {
+                toast.success("Image uploaded successfully!")
+            }).catch(error => { toast.error("Image upload failed") })
             toast.success("Post created successfully!")
             setPostData({
                 title: '',
@@ -62,6 +66,15 @@ function AddPost() {
         }).catch(error => {
             toast.error(error)
         })
+    }
+
+    const fileChangeHandler = (e) => {
+        if (e.target.files[0].type === "image/png" || e.target.files[0].type === "image/jpg" || e.target.files[0].type === "image/jpeg") {
+            setImage(e.target.files[0])
+        } else {
+            return
+        }
+        console.log(e.target.files[0])
     }
     return (
         <div className='wrapper'>
@@ -76,6 +89,10 @@ function AddPost() {
                         <div className='my-3'>
                             <Label for="content">Post Content</Label>
                             <JoditEditor ref={editor} value={postData.content} onChange={contentFieldChange}></JoditEditor>
+                        </div>
+                        <div className="mt-">
+                            <Label for="image">Select Banner Image</Label>
+                            <Input id="image" type='file' onChange={fileChangeHandler} />
                         </div>
                         <div className='my-3'>
                             <Label for="catrgory">Post Category</Label>

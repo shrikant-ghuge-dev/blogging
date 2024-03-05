@@ -16,6 +16,8 @@ import User from './Pages/User.jsx';
 import UserProfile from './Pages/UserRoutes/UserProfile.jsx';
 import UserDashboard from './Pages/UserRoutes/UserDashboard.jsx';
 import PostDetails from './Pages/UserRoutes/PostDetails.jsx';
+import UserProvider from './Context/UserProvider.jsx';
+import Category from './Pages/Category.jsx';
 
 const router = createBrowserRouter([
   {
@@ -36,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "post/:postId",
         element: <PostDetails />,
+      },
+      {
+        path: "category/:catId",
+        element: <Category />,
       },
       {
         path: 'user',
@@ -59,6 +65,8 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ToastContainer />
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </React.StrictMode>,
 )

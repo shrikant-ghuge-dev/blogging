@@ -1,13 +1,21 @@
 import React from 'react'
 import { useEffect } from 'react';
-import { Container } from 'reactstrap';
+import { Col, Container, Row } from 'reactstrap';
+import CategorySideMenu from '../Components/CategorySideMenu';
 import NewFeed from '../Components/NewFeed';
 
 function Home() {
 
     return (
         <Container>
-            <NewFeed />
+            <Row>
+                <Col md={3}>
+                    <CategorySideMenu />
+                </Col>
+                <Col md={9}>
+                    <NewFeed />
+                </Col>
+            </Row>
         </Container>
     )
 }

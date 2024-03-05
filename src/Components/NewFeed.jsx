@@ -43,6 +43,17 @@ function NewFeed() {
         })
     }
 
+    function deleteHandlers(post) {
+        console.log(post)
+        deletePost(post.postId).then(res => {
+            loadPOstData()
+            toast.success("Post Deleted Successfully!!")
+        }).catch(error => {
+            console.log(error)
+            toast.error("Error deleting post!")
+        })
+    }
+
     const changePageInfinite = () => {
         setCurrentPage(currentPage + 1)
     }
@@ -50,15 +61,14 @@ function NewFeed() {
         <div className="container-fluid">
             <Row>
                 <Col md={{
-                    size: 10,
-                    offset: 1
+                    size: 12
                 }}>
                     <h1>Blogs Count ({posts?.totalElements})</h1>
 
                     <InfiniteScroll
                         dataLength={posts?.content.length} next={changePageInfinite} hasMore={!posts?.lastPage} loader={<h4>Loading...</h4>}>
                         {posts?.content?.map(post => (
-                            <Post key={post.postId} post={post} />
+                            <Post key={post.postId} post={post} deletePost={deleteHandlers} />
                         ))}
                     </InfiniteScroll>
 
