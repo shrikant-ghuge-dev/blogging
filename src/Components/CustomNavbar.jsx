@@ -64,11 +64,8 @@ function CustomNavbar() {
                     </Nav>
                     <Nav navbar>
                         {userContextData?.user?.isLogin ? <>
-                            {/* <NavItem>
-                                <NavLink >Profile</NavLink>
-                            </NavItem> */}
                             <NavItem>
-                                <NavLink tag={Link} to={`/user/profile/${user?.id}`}>{userContextData?.user?.data?.name}</NavLink>
+                                <NavLink tag={Link} to={`/user/profile/${user?.id}`}>{userContextData.user.data?.name}</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink onClick={doLogout}>Logout</NavLink>

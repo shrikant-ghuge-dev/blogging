@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify';
-import { Button, Card, CardBody, CardText, Col, Container, Input, Row } from 'reactstrap';
+import { Button, Card, CardBody, CardText, Col, Container, Input, NavLink, Row } from 'reactstrap';
 import { isLoggedIn } from '../../Auth';
 import { BASE_URL } from '../../Services/Helper';
 import { addComment, loadPostDetails } from '../../Services/PostService';
@@ -48,7 +48,7 @@ function PostDetails() {
                 <Col md={{ size: 12 }}>
                     <Card className='mt-3 p-4'>
                         <CardText>
-                            <i>Posted By <b>{postDetails?.user?.name}</b> on <b>{getDate(postDetails?.addedDate)}</b></i>
+                            <i>Posted By <Link to={`/user/profile/${postDetails?.user?.id}`}><b className='text-uppercase'>{postDetails?.user?.name}</b></Link> on <b>{getDate(postDetails?.addedDate)}</b></i>
                         </CardText>
                         <CardText className='text-muted'>
                             {postDetails?.category?.categoryTitle}
