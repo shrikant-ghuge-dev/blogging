@@ -1,13 +1,16 @@
 import React from 'react'
+import { useContext } from 'react';
 import { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Button, Card, CardBody, CardHeader, Col, Container, Form, FormFeedback, FormGroup, Input, Label, Row } from 'reactstrap';
 import { doLogin } from '../Auth';
+import userContext from '../Context/UserContext';
 import { signin } from '../Services/UserService';
 
 
 function Login() {
+    const userContextData = useContext(userContext)
     const navigate = useNavigate();
     const [data, setData] = useState({
         username: '',
@@ -35,7 +38,11 @@ function Login() {
 
         signin(data).then(res => {
             doLogin(res, () => {
-                navigate("/user/dashboard");
+                userContextData.setUser({
+                    data: data.user,
+                    isLogin: true
+                })
+                navigate("/");
                 toast.success("User login successfully!!");
                 resetForm();
             });

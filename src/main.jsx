@@ -18,6 +18,7 @@ import UserDashboard from './Pages/UserRoutes/UserDashboard.jsx';
 import PostDetails from './Pages/UserRoutes/PostDetails.jsx';
 import UserProvider from './Context/UserProvider.jsx';
 import Category from './Pages/Category.jsx';
+import UpdateBlog from './Pages/UpdateBlog.jsx';
 
 const router = createBrowserRouter([
   {
@@ -48,12 +49,16 @@ const router = createBrowserRouter([
         element: <User />,
         children: [
           {
-            path: 'profile',
+            path: 'profile/:id',
             element: <UserProfile />
           },
           {
-            path: 'dashboard',
+            path: 'add-blog',
             element: <UserDashboard />
+          },
+          {
+            path: 'update-blog/:blogId',
+            element: <UpdateBlog />
           }
         ]
       }

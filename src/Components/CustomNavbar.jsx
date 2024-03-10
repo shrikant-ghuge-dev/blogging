@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
+import { useContext } from 'react';
 import { useEffect } from 'react';
 import { NavLink as Link, useNavigate } from 'react-router-dom';
 import { Collapse, DropdownItem, DropdownMenu, DropdownToggle, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, UncontrolledDropdown } from 'reactstrap';
 import { getCurrentUserDetails, isLoggedIn, logout } from '../Auth';
+import userContext from '../Context/UserContext';
 
 function CustomNavbar() {
     const navigate = useNavigate()
     const [isOpen, setIsOpen] = useState(false);
     const [isLogin, setIsLogin] = useState(false);
     const [user, setUser] = useState(undefined);
+    const userContextData = useContext(userContext)
 
     useEffect(() => {
         setIsLogin(isLoggedIn());
@@ -18,6 +21,10 @@ function CustomNavbar() {
     const doLogout = () => {
         logout(() => {
             setIsLogin(false);
+            userContextData.setUser({
+                data: null,
+                isLogin: false
+            })
             navigate("/")
         })
     }
@@ -33,8 +40,11 @@ function CustomNavbar() {
                         <NavItem>
                             <NavLink li tag={Link} to="/">Home</NavLink>
                         </NavItem>
+                        <NavItem>
+                            <NavLink li tag={Link} to="/user/add-blog">Post Blog</NavLink>
+                        </NavItem>
 
-                        <UncontrolledDropdown nav inNavbar>
+                        {/* <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav caret>
                                 Options
                             </DropdownToggle>
@@ -50,12 +60,15 @@ function CustomNavbar() {
                                     Reset
                                 </DropdownItem>
                             </DropdownMenu>
-                        </UncontrolledDropdown>
+                        </UncontrolledDropdown> */}
                     </Nav>
                     <Nav navbar>
-                        {isLogin ? <>
+                        {userContextData?.user?.isLogin ? <>
+                            {/* <NavItem>
+                                <NavLink >Profile</NavLink>
+                            </NavItem> */}
                             <NavItem>
-                                <NavLink tag={Link} to="/user/profile">Profile</NavLink>
+                                <NavLink tag={Link} to={`/user/profile/${user?.id}`}>{userContextData?.user?.data?.name}</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink onClick={doLogout}>Logout</NavLink>

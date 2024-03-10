@@ -17,6 +17,18 @@ const Category = () => {
             setPosts([...data])
         }).catch(error => toast.error(error))
     }, [catId])
+
+    function deleteHandlers(post) {
+        deletePost(post.postId).then(res => {
+            let recentPosts = posts.filter(p => p.postId != post.postId)
+            setPosts([...recentPosts])
+            toast.success("Post Deleted Successfully!!")
+        }).catch(error => {
+            console.log(error)
+            toast.error("Error deleting post!")
+        })
+    }
+
     return (
         <Container>
             <Row>
@@ -27,7 +39,7 @@ const Category = () => {
                     <h1>Blogs Count({posts.length})</h1>
                     {
                         posts && posts.map(post => (
-                            <Post post={post} />
+                            <Post post={post} key={post.postId} deleteHandler={deleteHandlers} />
                         ))
                     }
                     {posts.length <= 0 ? <h1>No posts in this category</h1> : ''}

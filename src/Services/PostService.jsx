@@ -33,3 +33,8 @@ export const getPostsByUser = (userId) => {
 export const deletePost = (postId) => {
     return privateAxios.delete(`/posts/${postId}`).then(res => res.data)
 }
+
+export const updateBlogPost = (postData, postId) => {
+    console.log(postData)
+    return privateAxios.put(`/posts/${postId}`, postData).then(res => res.data)
+}

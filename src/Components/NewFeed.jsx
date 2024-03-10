@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { Col, Container, Pagination, PaginationItem, PaginationLink, Row } from 'reactstrap'
-import { getAllPost } from '../Services/PostService'
+import { deletePost, getAllPost } from '../Services/PostService'
 import Post from './Post'
 import InfiniteScroll from 'react-infinite-scroll-component';
 
@@ -44,9 +44,12 @@ function NewFeed() {
     }
 
     function deleteHandlers(post) {
-        console.log(post)
         deletePost(post.postId).then(res => {
-            loadPOstData()
+            let recentPosts = posts.content.filter(p => p.postId != post.postId)
+            setPosts({
+                ...posts,
+                content: recentPosts
+            })
             toast.success("Post Deleted Successfully!!")
         }).catch(error => {
             console.log(error)
@@ -68,7 +71,7 @@ function NewFeed() {
                     <InfiniteScroll
                         dataLength={posts?.content.length} next={changePageInfinite} hasMore={!posts?.lastPage} loader={<h4>Loading...</h4>}>
                         {posts?.content?.map(post => (
-                            <Post key={post.postId} post={post} deletePost={deleteHandlers} />
+                            <Post key={post.postId} post={post} deleteHandler={deleteHandlers} />
                         ))}
                     </InfiniteScroll>
 

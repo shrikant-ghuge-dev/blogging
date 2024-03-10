@@ -24,9 +24,9 @@ function UserDashboard() {
     }
 
     function deleteHandlers(post) {
-        console.log(post)
         deletePost(post.postId).then(res => {
-            loadPOstData()
+            let recentPosts = posts.filter(p => p.postId != post.postId)
+            setPosts([...recentPosts])
             toast.success("Post Deleted Successfully!!")
         }).catch(error => {
             console.log(error)
