@@ -39,7 +39,7 @@ function Login() {
         signin(data).then(res => {
             doLogin(res, () => {
                 userContextData.setUser({
-                    data: data.user,
+                    data: res.user,
                     isLogin: true
                 })
                 navigate("/");

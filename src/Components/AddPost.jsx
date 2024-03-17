@@ -74,7 +74,6 @@ function AddPost() {
         } else {
             return
         }
-        console.log(e.target.files[0])
     }
     return (
         <div className='wrapper'>

@@ -43,29 +43,11 @@ function CustomNavbar() {
                         <NavItem>
                             <NavLink li tag={Link} to="/user/add-blog">Post Blog</NavLink>
                         </NavItem>
-
-                        {/* <UncontrolledDropdown nav inNavbar>
-                            <DropdownToggle nav caret>
-                                Options
-                            </DropdownToggle>
-                            <DropdownMenu>
-                                <DropdownItem>
-                                    Option 1
-                                </DropdownItem>
-                                <DropdownItem>
-                                    Option 2
-                                </DropdownItem>
-                                <DropdownItem divider />
-                                <DropdownItem>
-                                    Reset
-                                </DropdownItem>
-                            </DropdownMenu>
-                        </UncontrolledDropdown> */}
                     </Nav>
                     <Nav navbar>
                         {userContextData?.user?.isLogin ? <>
                             <NavItem>
-                                <NavLink tag={Link} to={`/user/profile/${user?.id}`}>{userContextData.user.data?.name}</NavLink>
+                                <NavLink tag={Link} to={`/user/profile/${userContextData?.user?.data?.id}`}>{userContextData?.user?.data?.name}</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink onClick={doLogout}>Logout</NavLink>

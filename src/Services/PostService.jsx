@@ -35,6 +35,5 @@ export const deletePost = (postId) => {
 }
 
 export const updateBlogPost = (postData, postId) => {
-    console.log(postData)
     return privateAxios.put(`/posts/${postId}`, postData).then(res => res.data)
 }
